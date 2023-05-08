@@ -1,3 +1,10 @@
+body {
+  /* background-color: #f0f0f0; */
+  background-color: #73dbe9;
+  overflow-x: hidden;
+}
+
+
 .App {
   text-align: center;
 }
@@ -36,3 +43,8 @@
     transform: rotate(360deg);
   }
 }
+
+/* .welcomBlock {
+  width: 100%;
+
+} */

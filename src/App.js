@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import { useEffect } from 'react';
 import './App.css';
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
+import ModalWindow from './components/Modal/Modal';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { setUser } from './store/slices/authSlice';
 
 function App() {
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(setUser({user: user.email, auth: true}))
+      }
+    });
+  }, [dispatch])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+        <Header />
+        <Main />
+        <ModalWindow />
+      </>
   );
 }
 
